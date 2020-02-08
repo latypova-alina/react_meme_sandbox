@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import Meme from './Meme/Meme';
+import { shuffle, arrayBuilder } from './functions';
 
-function App() {
+const CatsNum = 14
+
+const app = props => {
+  const [ catsCollection, setCats ] = useState({ cats: arrayBuilder("./", ".jpg", CatsNum) });
+
+  const buildCatsArray = (catsArray = []) => {
+    for (let j = 0; j < CatsNum; j++) {
+      catsArray.push(<Meme image_source={catsCollection.cats[j]}/>)
+    }
+
+    return catsArray
+  }
+
+  const catsShuffleHandler = () => {
+    setCats((prevState, props) => ({
+      cats: shuffle(prevState.cats)
+    }));
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {buildCatsArray()}
+      <button onClick={catsShuffleHandler}>Energiya kota Borisa</button>
     </div>
-  );
+  )
 }
 
-export default App;
+export default app;
