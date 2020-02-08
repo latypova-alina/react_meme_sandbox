@@ -1,4 +1,5 @@
 import React from 'react';
+import "./Meme.css";
 
 const meme = (props) => {
   return (

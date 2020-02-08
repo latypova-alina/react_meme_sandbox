@@ -1,0 +1,15 @@
+.Meme .column {
+  float: left;
+  width: 20%;
+}
+
+.Meme .row::after {
+  content: "";
+  clear: both;
+}
+
+.Meme img {
+  width: 100%;
+  display: table;
+  height: 250px;
+}
