@@ -1,13 +1,25 @@
-.App {
-  text-align: center;
-}
-
 button {
-  border: none;
+  border: 1px solid black;
   color: white;
   font-size: 30px;
   cursor: pointer;
   background-color: green;
   height: 250px;
+  width: 100%;
+}
+
+.column {
+  float: left;
   width: 20%;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+}
+
+img {
+  width: 100%;
+  display: table;
+  height: 250px;
 }
