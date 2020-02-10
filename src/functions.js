@@ -4,9 +4,12 @@ export const shuffle = (array) => {
   return array
 }
 
-export const arrayBuilder = (start, finish, iterations_number, array = []) => {
+export const objectBuilder = (start, finish, iterations_number, array = []) => {
   for (let j = 0; j < iterations_number; j++) {
-    array.push(start + j + finish)
+    array.push({
+      id: j,
+      image: start + j + finish
+    });
   }
 
   return array

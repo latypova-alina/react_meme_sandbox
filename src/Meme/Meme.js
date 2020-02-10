@@ -5,7 +5,7 @@ const meme = (props) => {
     <div className="Meme">
       <div className="row">
         <div className="column">
-          <img src={props.image_source} />
+          <img id={props.id} src={props.image_source} onClick={props.click}/>
         </div>
       </div>
     </div>
