@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import './App.css';
 import Meme from './Meme/Meme';
 import { shuffle, objectBuilder } from './functions';
+import classes from "./App.css";
 
 const CatsNum = 13
 const MagicCat = 9
@@ -47,21 +47,21 @@ const app = props => {
     })
   ) : null
 
-  const buttons = (click, text) => {
+  const buttons = (click, text, buttonClass) => {
     return (
       <div className="row">
         <div className="column">
-          <button onClick={click}>{text}</button>
+          <button className={classes.Button} onClick={click}>{text}</button>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="App">
-      {buttons(hideCatsHandler, "Ukryj koty")}
+    <div className={classes.App}>
+      {buttons(hideCatsHandler, "Ukryj koty", "HidingButton")}
       {cats}
-      {buttons(catsShuffleHandler, "Energiya kota Borisa")}
+      {buttons(catsShuffleHandler, "Energiya kota Borisa", "ShufflingButton")}
     </div>
   )
 }

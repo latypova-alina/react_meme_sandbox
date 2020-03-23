@@ -1,4 +1,4 @@
-button {
+.Button {
   border: 1px solid black;
   color: white;
   font-size: 30px;
@@ -6,6 +6,18 @@ button {
   background-color: green;
   height: 250px;
   width: 100%;
+}
+
+.HidingButton:hover {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("/hide_the_cat.jpg");
+}
+
+.ShufflingButton:hover {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: url("/kot_boris.jpg");
 }
 
 .column {
