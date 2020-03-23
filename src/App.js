@@ -49,9 +49,9 @@ const app = props => {
 
   const buttons = (click, text, buttonClass) => {
     return (
-      <div className="row">
-        <div className="column">
-          <button className={classes.Button} onClick={click}>{text}</button>
+      <div className={classes.row}>
+        <div className={classes.column}>
+          <button className={`${buttonClass}`} onClick={click}>{text}</button>
         </div>
       </div>
     )
@@ -59,9 +59,9 @@ const app = props => {
 
   return (
     <div className={classes.App}>
-      {buttons(hideCatsHandler, "Ukryj koty", "HidingButton")}
+      {buttons(hideCatsHandler, "Ukryj koty", classes.Hiding)}
       {cats}
-      {buttons(catsShuffleHandler, "Energiya kota Borisa", "ShufflingButton")}
+      {buttons(catsShuffleHandler, "Energiya kota Borisa", classes.Shuffling)}
     </div>
   )
 }
