@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import Meme from './Meme/Meme';
-import { shuffle, objectBuilder } from './functions';
+import Memes from '../components/Memes/Memes';
+import MagicButtons from '../components/MagicButtons/MagicButtons';
+import { shuffle, objectBuilder } from '../functions';
 import classes from "./App.css";
 
 const CatsNum = 13
@@ -37,31 +38,25 @@ const app = props => {
   }
 
   let cats = showCats ? (
-    catsCollection.cats.map(cat => {
-      return (<Meme
-        image_source={cat.image}
-        key={cat.id}
-        id={cat.id}
-        click={() => clickCatHandler(cat.id)}/>
-      )
-    })
+    <Memes
+      clicked={clickCatHandler}
+      collection={catsCollection}
+    />
   ) : null
-
-  const buttons = (click, text, buttonClass) => {
-    return (
-      <div className={classes.row}>
-        <div className={classes.column}>
-          <button className={`${buttonClass}`} onClick={click}>{text}</button>
-        </div>
-      </div>
-    )
-  }
 
   return (
     <div className={classes.App}>
-      {buttons(hideCatsHandler, "Ukryj koty", classes.Hiding)}
+      <MagicButtons
+        clicked={hideCatsHandler}
+        text="Ukryj koty"
+        buttonClass={classes.Hiding}
+      />
       {cats}
-      {buttons(catsShuffleHandler, "Energiya kota Borisa", classes.Shuffling)}
+      <MagicButtons
+        clicked={catsShuffleHandler}
+        text="Energiya kota Borisa"
+        buttonClass={classes.Shuffling}
+      />
     </div>
   )
 }
