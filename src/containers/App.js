@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import Memes from '../components/Memes/Memes';
 import MagicButtons from '../components/MagicButtons/MagicButtons';
 import { shuffle, objectBuilder } from '../functions';
@@ -8,57 +8,67 @@ const CatsNum = 13
 const MagicCat = 9
 const DefaultImage = './lost_cat.jpg'
 
-const app = props => {
-  const [ catsCollection, setCats ] = useState({ cats: objectBuilder("./", ".jpg", CatsNum) });
-  const [ showCats, setShowCats] = useState(false);
+class App extends Component {
+  state = {
+    cats: objectBuilder("./", ".jpg", CatsNum),
+    showCats: false
+  }
 
-  const catsShuffleHandler = () => {
-    setCats((prevState, props) => ({
+  catsShuffleHandler = () => {
+    this.setState((prevState) => ({
       cats: shuffle(prevState.cats)
     }));
   }
 
-  const clickCatHandler = (id) => {
-    const catIndex = catsCollection.cats.findIndex(kitty => {
+  clickCatHandler = (id) => {
+    const catIndex = this.state.cats.findIndex(kitty => {
       return kitty.id === id;
     })
 
-    const cat = { ...catsCollection.cats[catIndex] };
+    const cat = { ...this.state.cats[catIndex] };
 
     cat.image = DefaultImage;
 
-    const cats = [...catsCollection.cats];
+    const cats = [...this.state.cats];
     cats[catIndex] = cat;
 
-    setCats({cats: id === MagicCat ? objectBuilder("./", ".jpg", CatsNum) : cats});
+    this.setState({
+      cats: (id === MagicCat) ? objectBuilder("./", ".jpg", CatsNum) : cats
+    });
   }
 
-  const hideCatsHandler = () => {
-    setShowCats(!showCats);
+  hideCatsHandler = () => {
+    this.setState((prevState) => ({
+      showCats: !prevState.showCats
+    }));
   }
 
-  let cats = showCats ? (
-    <Memes
-      clicked={clickCatHandler}
-      collection={catsCollection}
-    />
-  ) : null
+  render() {
+    let cats = this.state.showCats ? (
+      <Memes
+        clicked={this.clickCatHandler}
+        collection={this.state}
+      />
+    ) : null;
 
-  return (
-    <div className={classes.App}>
-      <MagicButtons
-        clicked={hideCatsHandler}
-        text="Ukryj koty"
-        buttonClass={classes.Hiding}
-      />
-      {cats}
-      <MagicButtons
-        clicked={catsShuffleHandler}
-        text="Energiya kota Borisa"
-        buttonClass={classes.Shuffling}
-      />
-    </div>
-  )
+    return (
+      <div className={classes.App}>
+        <MagicButtons
+          clicked={this.hideCatsHandler}
+          text="Ukryj koty"
+          buttonClass={classes.Hiding}
+        />
+        {cats}
+        <MagicButtons
+          clicked={this.catsShuffleHandler}
+          text="Energiya kota Borisa"
+          buttonClass={classes.Shuffling}
+        />
+      </div>
+    );
+  }
+
+  return
 }
 
-export default app;
+export default App;
