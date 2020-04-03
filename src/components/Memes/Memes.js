@@ -1,15 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Meme from './Meme/Meme';
 
-const memes = (props) => props.collection.cats.map(cat => {
-  return (
-    <Meme
-      image_source={cat.image}
-      key={cat.id}
-      id={cat.id}
-      click={() => props.clicked(cat.id)}
-    />
-  )
-});
+class Memes extends Component {
+  shouldComponentUpdate(nextProps, nextState){
+    console.log('Memes.js shouldComponentUpdate');
+    return true;
+  }
 
-export default memes;
+  getSnapshotBeforeUpdate(prevProps, prevState){
+    console.log('Memes.js getSnapshotBeforeUpdate');
+    return {message: "Snapshot!"};
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot){
+    console.log('Memes.js componentDidUpdate');
+    console.log(snapshot);
+  }
+
+  render(){
+    return this.props.collection.cats.map(cat => (
+      <Meme
+        image_source={cat.image}
+        key={cat.id}
+        id={cat.id}
+        click={() => this.props.clicked(cat.id)}
+      />
+    ));
+  }
+};
+
+export default Memes;

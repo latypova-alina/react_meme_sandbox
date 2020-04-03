@@ -9,6 +9,30 @@ const MagicCat = 9
 const DefaultImage = './lost_cat.jpg'
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    console.log('App.js constructor');
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('App.js getDerivedStateFromProps', props);
+    return state;
+  }
+
+  componentDidMount(){
+    console.log("App.js componentDidMount");
+  }
+
+  shouldComponentUpdate(nextProps, nextState){
+    console.log('App.js shouldComponentUpdate');
+    return true;
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot){
+    console.log('App.js componentDidUpdate');
+    console.log(snapshot);
+  }
+
   state = {
     cats: objectBuilder("./", ".jpg", CatsNum),
     showCats: false
@@ -44,6 +68,8 @@ class App extends Component {
   }
 
   render() {
+    console.log("App.js render");
+
     let cats = this.state.showCats ? (
       <Memes
         clicked={this.clickCatHandler}
